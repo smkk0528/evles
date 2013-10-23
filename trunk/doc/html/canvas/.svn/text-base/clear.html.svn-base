@@ -1,0 +1,84 @@
+<!doctype html>
+<html><head>
+<meta charset="utf-8">
+<title>canvas-clear</title>
+<meta name="keywords" content="" />
+<meta name="description" content="elves.js" /> 
+<meta name="author" content="elves Team" />
+<link rel="stylesheet" type="text/css" href="../style/style.css" />
+</head>
+
+<body>
+<h1><strong>clear(x,y)</strong></h1>
+<h2>概述</h2>
+<p>canvas方法之一。刷新画布</p>
+<h3>参数:x,y</h3>
+<p>刷新区域从原点（0,0）开始，到（x,y）结束。  参数x,y可选，如果缺省，则默认整个画布刷新。</p>
+
+<h3>描述:</h3>
+<p>刷新canvas从原点（0,0）到（100,100）的区域</p>
+
+<h4>HTML 代码:</h4>
+<pre>&lt;canvas id="test" width="507px" height="320px" style="border:1px solid #F00"&gt;</pre>
+<h4>elves 代码:</h4>
+<pre>
+$.cacheImg('porker', 'img/img.png');   <span class="green">//预先加载img资源</span>
+$(function() {
+	
+	
+	$("#test").canvas("desk"); <span class="green">//初始化canvas</span>
+		
+	$("$desk").entity("card1",{
+            dx : 0,
+            dy : 0
+	})
+	.res("porker")     
+	.draw();    
+    
+    $("$desk").clear(100,100);<span class="green">//刷新画布的相关区域</span>
+});
+
+</pre>
+<h4>demo:</h4>
+<p>
+<script type="text/javascript" src="../../../src/elves.js"></script>
+<script type="text/javascript" src="../../../src/plugin/dom.js"></script>
+<script type="text/javascript">
+$.cacheImg('porker', '../img/demo.jpg');   //预先加载img资源
+$(function() {
+	
+	
+	$("#test").canvas("desk"); //初始化canvas
+		
+	$("$desk").entity("card1",{ 
+			dx : 0, 
+			dy : 0, 
+		})
+	
+	$("$desk@card1")    ////选择entity对象$desk@card1
+	.res("porker")    //通过res()方法将预先加载img资源添加进来
+	.draw();    //将img画在画布上
+	
+});
+
+function canvas_clear(){
+	var x = document.getElementById("x").value;
+	var y = document.getElementById("y").value;
+	$("$desk").clear(x,y);
+}
+
+function canvas_old(){
+	$("$desk@card1").res("porker").draw();
+}
+
+</script>
+<canvas id="test" width="500px" height="300px" style="border:1px solid #F00"></canvas>
+<br />
+填写刷新的x<input id="x" type="text" value="100" />
+&nbsp;&nbsp;&nbsp;
+填写刷新的y<input id="y" type="text" value="100" />
+&nbsp;&nbsp;&nbsp;<input type="button" onClick="canvas_clear()" value="刷新画布">
+&nbsp;&nbsp;&nbsp;<input type="button" onClick="canvas_old()" value="重置画布">
+</p>
+</body>
+</html>

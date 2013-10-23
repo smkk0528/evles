@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+		<title>debug1</title>
+		<meta name="description" content="">
+		<meta name="author" content="Administrator">
+
+		<meta name="viewport" content="width=device-width; initial-scale=1.0">
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico">
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+        <script src="js/elves.js"></script>
+        <script src="js/dom.js"></script>
+        <script src="js/lc.debug.js"></script>
+	</head>
+	<body>
+	<h1>debug--1</h1>	
+    
+			<div id="message" class="p20">
+	接受的信息将在2秒后呈现。
+</div>
+<script>
+
+function noti(){
+	$.lc.notify('all', {
+		eventTag : 'onDizhuOK',
+		dizhu : 'me',
+		fen : "100"
+	});
+}
+
+function ready(){
+	$.lc.ready();
+}
+
+
+function setR(v){
+	$.lc.setRequestedOrientation(v);
+}
+</script>
+	
+ 	<button onClick="noti()">notify</button>
+    <button onClick="ready()">ready</button>
+    <button onClick="setR(-1)">屏幕跟随系统</button>
+    <button onClick="setR(0)">强制横屏</button>
+    <button onClick="setR(1)">强制竖屏</button>
+	</body>
+</html>

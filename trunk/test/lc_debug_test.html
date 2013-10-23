@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+		<title>lc_debug_test</title>
+		<script type="text/javascript">
+			//browser checked
+			if (!window.WebSocket) {
+				window.WebSocket = window.MozWebSocket;
+			}
+			// add function to WebSocket`s prototype
+			window.WebSocket.prototype.sendMessage = function(message) {
+				if (this.readyState == WebSocket.OPEN) {
+					this.send(message);
+				}
+			};
+
+			window.WebSocket.prototype.postAll = function(message) {
+				var msg = '{"type" : "postAll",	"msg" :"' + message + '"}';
+				message_cache["postAll"] = "";
+				this.sendMessage(msg);
+			};
+
+			window.WebSocket.prototype.getPlayNum = function() {
+				var msg = '{"type" : "getPlayNum",	"msg" :""}';
+				message_cache["getPlayNum"] = "";
+				this.sendMessage(msg);
+			};
+			window.WebSocket.prototype.getPlayers = function() {
+				var msg = '{"type" : "getPlayers",	"msg" :""}';
+				message_cache["getPlayers"] = "";
+				this.sendMessage(msg);
+			};
+			window.WebSocket.prototype.getSelf = function() {
+				var msg = '{"type" : "getSelf",	"msg" :""}';
+				message_cache["getSelf"] = "";
+				this.sendMessage(msg);
+			};
+			window.WebSocket.prototype.getForward = function() {
+				var msg = '{"type" : "getForward",	"msg" :""}';
+				message_cache["getForward"] = "";
+				this.sendMessage(msg);
+			};
+			window.WebSocket.prototype.getBackward = function() {
+				var msg = '{"type" : "getBackward",	"msg" :""}';
+				this.sendMessage(msg);
+				this.onmessage = function(event) {
+					//数据返回回去
+				};
+			};
+			var webClient = new WebSocket("ws://localhost:8089/websocket/admin/doudiz2");
+			var message_cache = [];
+			webClient.onopen = function(event) {
+				alert("Web Socket opened!");
+			};
+			webClient.onclose = function(event) {
+				alert("Web Socket closed!");
+			};
+			function next() {
+				var result = webClient.getBackward();
+				alert(result);
+			}
+		</script>
+	</head>
+
+	<body>
+		<div>
+			<form method="post" enctype="multipart/form-data" action="upload"></form> 
+			<button onclick="webClient.getPlayers()">
+				获得全部
+			</button>
+			<button onclick="webClient.getPlayNum()">
+				获得用户数量
+			</button>
+			<button onclick="webClient.getSelf()">
+				当前用户
+			</button>
+			<button onclick="webClient.getForward()">
+				上一个
+			</button>
+			<button onclick="next();">
+				下一个
+			</button>
+		</div>
+	</body>
+</html>

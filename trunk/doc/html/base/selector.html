@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Base Selector</title>
+		<meta name="keywords" content="" />
+		<meta name="description" content="elves.js" />
+		<meta name="author" content="elves Team" />
+		<link rel="stylesheet" type="text/css" href="../style/style.css" />
+	</head>
+
+	<body>
+		<h1><strong>selector</strong><span>&gt;</span></h1>
+		<ul>
+			<li>
+				Dom Selector
+			</li>
+			<li>
+				Canvas Selector
+			</li>
+			<li>
+				Entity Selector
+			</li>
+		</ul>
+		<h2>Dom Selector 概述</h2>
+		<p>
+			根据给定的选择器，选择对象。selector分为三种类型。
+		</p>
+		<h3>描述:</h3>
+		<p>
+			支持css3选择器,根据css3选择器选择Dom
+		</p>
+		<h4>HTML 代码:</h4>
+		<pre>&lt;div id="notMe"&gt;&lt;p&gt;id="notMe"&lt;/p&gt;&lt;/div&gt;<br />&lt;div id="myDiv"&gt;id="myDiv"&lt;/div&gt;</pre>
+		<h4>elves 代码:</h4>
+		<pre>$("#myDiv");</pre>
+		<h4>结果:</h4>
+		<pre>[ &lt;div id="myDiv"&gt;id="myDiv"&lt;/div&gt; ]</pre>
+		<h2>Canvas Selector 概述</h2>
+		<p>
+			根据canvas id查找Canvas对象。使用$开头后面跟上ID，例如 $id
+		</p>
+		<h3>描述:</h3>
+		<p>
+			查找canvas
+		</p>
+		<h4>HTML 代码:</h4>
+		<pre>&lt;canvas&nbsp;id="myCanvas"&nbsp;width="507px"&nbsp;height="320px"&nbsp;style='border:1px&nbsp;solid&nbsp;red;'&gt;&lt;/canvas&gt;</pre>
+		<h4>elves 代码:</h4>
+		<pre>$("#myCanvas").canvas('canvas_id');<span class="green">//初始化canvas</span>
+$("$canvas_id");<span class="green">//选择canvas</span></pre>
+		<h4>结果:</h4>
+		<pre>[ Canvas Object ]</pre>
+		<h2>Entity Selector 概述</h2>
+		<p>
+			根据entity id查找Entity对象。需要先选择canvas，再接上eneity selector，entity selector以@开头。 例如 $canvas_id@entity_id
+		</p>
+		<h3>描述:</h3>
+		<p>
+			查找entity
+		</p>
+		<h4>HTML 代码:</h4>
+		<pre>&lt;canvas&nbsp;id="myCanvas"&nbsp;width="507px"&nbsp;height="320px"&nbsp;style='border:1px&nbsp;solid&nbsp;red;'&gt;&lt;/canvas&gt;</pre>
+		<h4>elves 代码:</h4>
+		<pre>$("#myCanvas").canvas('canvas_id').entity('entity_id');<span class="green">//初始化canvas，并且创建entity</span>
+$("$canvas_id@entity_id");<span class="green">//选择entity</span></pre>
+		<h4>结果:</h4>
+		<pre>[ Entity Object ]</pre>
+	</body>
+</html>

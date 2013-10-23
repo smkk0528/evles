@@ -1,0 +1,176 @@
+<!doctype html>
+<html><head>
+<meta charset="utf-8">
+<title>entity-rotate</title>
+<meta name="keywords" content="" />
+<meta name="description" content="elves.js" /> 
+<meta name="author" content="elves Team" />
+<link rel="stylesheet" type="text/css" href="../style/style.css" />
+</head>
+
+<body>
+<h1><strong>rotate(value)</strong></h1>
+<h2>概述</h2>
+<p>entity方法之一。将匹配的entity对象在画布上按一定角度旋转。</p>
+
+<h3>参数:value</h3>
+<p>旋转的角度。</p>
+
+ 
+<h3>描述:</h3>
+<p>将匹配的entity对象在画布上按一定角度旋转。</p>
+
+<h4>HTML 代码:</h4>
+<pre>&lt;canvas id="test" width="507px" height="320px" style="border:1px solid #F00"&gt;</pre>
+<h4>elves 代码:</h4>
+<pre>
+$.cacheImg('porker', '../img/img.png');   <span class="green">//预先加载img资源</span>
+
+$(function() {
+	
+	
+	$("#test").canvas("desk"); <span class="green">//初始化canvas</span>
+		
+	$("$desk").entity("card3",{    <span class="green">//将初始化的canvas转成entity对象， 并命名为"card1"</span>
+            sx : 100,   
+            sy : 60,   
+            sw : 50,  
+            sh : 30,    
+            dx : 100,    
+            dy : 0,    
+            dw : 50,   
+            dh : 30,   
+	})
+	.res("porker")   
+	.rotate(45)    <span class="green">//将$desk@card1按顺时针旋转45度</span>
+    .draw();  
+});
+
+</pre>
+<h4>demo:</h4>
+<p>
+<script type="text/javascript" src="../../../src/elves.js"></script>
+<script type="text/javascript" src="../../../src/plugin/dom.js"></script>
+<script type="text/javascript">
+$.cacheImg('porker', '../img/img.png');   
+$(function() {
+	$("#test").canvas("desk"); //初始化canvas		
+	$("$desk").entity("card3",{    //将初始化的canvas转成entity对象， 并命名为"card1"
+            sx : 100,   //可选。原图片开始剪切的 x 坐标位置。
+            sy : 60,   //可选。原图片开始剪切的 y 坐标位置。
+            sw : 50,    //可选。原图片被剪切的宽度。
+            sh : 30,    //可选。原图片被剪切的高度。
+            dx : 100,    //在画布上放置图像的 x 坐标位置
+            dy : 0,    //在画布上放置图像的 y 坐标位置。
+            dw : 50,   //可选。在画布上要使用的图像的宽度。（伸展或缩小图像）
+            dh : 30,   //可选。在画布上要使用的图像的高度。（伸展或缩小图像）
+	})
+	.res("porker")    //通过res()方法将预先加载的img资源添加进来</span>
+	.translate(0,0)    //水平向右位移100，垂直向下位移60</span>
+    .draw();    //将entity对象画在画布上。</span>
+});
+
+function move(){
+	
+	$("$desk@card3").remove();
+	var value = document.getElementById("jd").value;
+	
+	$("#test").canvas("desk"); 
+	$("$desk").entity("card3",{   
+            sx : 100,   
+            sy : 60,   
+            sw : 50,  
+            sh : 30,    
+            dx : 100,    
+            dy : 0,    
+            dw : 50,   
+            dh : 30,   
+	})
+	.res("porker")   
+	.rotate(value)    
+    .draw(); 
+}
+</script>
+<canvas id="test" width="507px" height="320px" style="border:1px solid #F00"></canvas>
+<br />旋转角度<input id="jd" type="text" value="45">&nbsp;&nbsp;&nbsp;<input type="button" onClick="move()" value="move">&nbsp;&nbsp;
+</p>
+
+<h1><strong>rotate() &amp; translate()</strong></h1>
+<h2>概述</h2>
+<p>使用rotate()旋转，其总是以画布的左上原点（0，0）来旋转，  如果我们想以entity对象的左上原点来旋转，但是画布的左上原点 与 entity对象的左上原点不是一个点，这样就需要translate来帮忙了。 </p>
+<h4>elves 代码:</h4>
+<pre>
+$.cacheImg('porker', '../img/img.png');   <span class="green">//预先加载img资源</span>
+
+$(function() {
+	
+	
+	$("#test").canvas("desk"); <span class="green">//初始化canvas</span>
+		
+	$("$desk").entity("card3",{    <span class="green">//将初始化的canvas转成entity对象， 并命名为"card3"</span>
+            sx : 100,   
+            sy : 60,   
+            sw : 50,  
+            sh : 30,    
+            dx : 0,    
+            dy : 0,   <span class="green">//dx，dy表示在画布上的显示位置为左上原点，这样entity对象就按照自己的左上原点旋转，<br /> entity对象需要向右位移100用translate()来实现</span> 
+            dw : 50,   
+            dh : 30,   
+	})
+	.res("porker")
+	.translate(100,0)   <span class="green">//entity对象向右位移100</span> 
+    	.rotate(45)    <span class="green">//将$desk@card1按顺时针旋转45度</span> 
+    	.draw();  
+});
+
+</pre>
+<h4>demo:</h4>
+<p>
+ 
+<script type="text/javascript">
+$.cacheImg('porker', '../img/img.png');   
+$(function() {
+	$("#test2").canvas("desk2"); //初始化canvas		
+	$("$desk2").entity("card3",{    //将初始化的canvas转成entity对象， 并命名为"card1"
+            sx : 100,   //可选。原图片开始剪切的 x 坐标位置。
+            sy : 60,   //可选。原图片开始剪切的 y 坐标位置。
+            sw : 50,    //可选。原图片被剪切的宽度。
+            sh : 30,    //可选。原图片被剪切的高度。
+            dx : 0,    //在画布上放置图像的 x 坐标位置
+            dy : 0,    //在画布上放置图像的 y 坐标位置。
+            dw : 50,   //可选。在画布上要使用的图像的宽度。（伸展或缩小图像）
+            dh : 30,   //可选。在画布上要使用的图像的高度。（伸展或缩小图像）
+	})
+	.res("porker")    //通过res()方法将预先加载的img资源添加进来</span>
+	.translate(100,0)    //水平向右位移100，垂直向下位移60</span>
+    .draw();    //将entity对象画在画布上。</span>
+});
+
+function move2(){
+	
+	$("$desk2@card3").remove();
+	var value = document.getElementById("jd2").value;
+	
+	$("#test2").canvas("desk2"); 
+	$("$desk2").entity("card3",{   
+            sx : 100,   
+            sy : 60,   
+            sw : 50,  
+            sh : 30,    
+            dx : 0,    
+            dy : 0,    
+            dw : 50,   
+            dh : 30,   
+	})
+	.res("porker")   
+	.translate(100,0)
+	.rotate(value)    
+    .draw(); 
+}
+</script>
+<canvas id="test2" width="507px" height="320px" style="border:1px solid #F00"></canvas>
+<br />旋转角度<input id="jd2" type="text" value="45">&nbsp;&nbsp;&nbsp;<input type="button" onClick="move2()" value="move">&nbsp;&nbsp;
+</p>
+
+</body>
+</html>

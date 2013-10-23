@@ -1,0 +1,45 @@
+<!doctype html>
+<html><head>
+<meta charset="utf-8">
+<title>canvas-width</title>
+<meta name="keywords" content="" />
+<meta name="description" content="elves.js" /> 
+<meta name="author" content="elves Team" />
+<link rel="stylesheet" type="text/css" href="../style/style.css" />
+</head>
+
+<body>
+<h1><strong>width(value)</strong></h1>
+<h2>概述</h2>
+<p>canvas方法之一。 为canvas对象设置宽度</p>
+<h3>参数:value</h3>
+<p>宽度的数值</p>
+<h3>描述:</h3>
+<p>为canvas对象设置宽度</p>
+
+<h4>HTML 代码:</h4>
+<pre>&lt;canvas id="test" width="507px" height="320px" style="border:1px solid #F00"&gt;</pre>
+<h4>elves 代码:</h4>
+<pre>
+$(function() {   
+	$("#test").canvas("desk")    <span class="green">//初始化canvas</span>
+    $("$desk").width(800);  <span class="green">//选中刚刚初始化的canvas对象，将宽度设置为800</span>
+});
+</pre>
+<h4>demo:</h4>
+<p>
+<script type="text/javascript" src="../../../src/elves.js"></script>
+<script type="text/javascript" src="../../../src/plugin/dom.js"></script>
+<script type="text/javascript">
+function setWidth(){
+	var widthValue = document.getElementById("widthValue").value;  
+	$("#test").canvas("desk")     
+    $("$desk").width(widthValue);
+}
+</script>
+<canvas id="test" width="507px" height="320px" style="border:1px solid #F00"></canvas>
+<br />
+填写canvas的新宽度<input id="widthValue" type="text" value="300" />&nbsp;&nbsp;&nbsp;<input type="button" onClick="setWidth()" value="修改宽度">
+</p>
+</body>
+</html>

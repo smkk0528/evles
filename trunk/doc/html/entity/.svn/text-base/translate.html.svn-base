@@ -1,0 +1,96 @@
+<!doctype html>
+<html><head>
+<meta charset="utf-8">
+<title>entity-translate</title>
+<meta name="keywords" content="" />
+<meta name="description" content="elves.js" /> 
+<meta name="author" content="elves Team" />
+<link rel="stylesheet" type="text/css" href="../style/style.css" />
+</head>
+
+<body>
+<h1><strong>translate(x,y)</strong></h1>
+<h2>概述</h2>
+<p>entity方法之一。将匹配的entity对象在画布上进行位移。</p>
+
+<h3>参数:x,y</h3>
+<p>位移水平距离和垂直距离。</p>
+
+ 
+<h3>描述:</h3>
+<p>将名为“$desk@card1”的entity对象在画布上位移。</p>
+
+<h4>HTML 代码:</h4>
+<pre>&lt;canvas id="test" width="507px" height="320px" style="border:1px solid #F00"&gt;</pre>
+<h4>elves 代码:</h4>
+<pre>
+$.cacheImg('porker', 'img/img.png');   <span class="green">//预先加载img资源</span>
+
+$(function() {
+	
+	
+	$("#test").canvas("desk"); <span class="green">//初始化canvas</span>
+		
+	$("$desk").entity("card1",{    <span class="green">//将初始化的canvas转成entity对象， 并命名为"card1"</span>
+            sx : 0,   <span class="green">//可选。原图片开始剪切的 x 坐标位置。</span>
+            sy : 0,   <span class="green">//可选。原图片开始剪切的 y 坐标位置。</span>
+            sw : 50,    <span class="green">//可选。原图片被剪切的宽度。</span>
+            sh : 30,    <span class="green">//可选。原图片被剪切的高度。</span>
+            dx : 0,    <span class="green">//在画布上放置图像的 x 坐标位置。</span>
+            dy : 0,    <span class="green">//在画布上放置图像的 y 坐标位置。</span>
+            dw : 50,   <span class="green">//可选。在画布上要使用的图像的宽度。（伸展或缩小图像）</span>
+            dh : 30,   <span class="green">//可选。在画布上要使用的图像的高度。（伸展或缩小图像）</span>
+	})
+	.res("porker")    <span class="green">//通过res()方法将预先加载的img资源添加进来</span>
+	.translate(100,60)    <span class="green">//水平向右位移100，垂直向下位移60</span>
+    .draw();    <span class="green">//将entity对象画在画布上。</span>
+    
+    
+});
+
+</pre>
+<h4>demo:</h4>
+<p>
+<script type="text/javascript" src="../../../src/elves.js"></script>
+<script type="text/javascript" src="../../../src/plugin/dom.js"></script>
+<script type="text/javascript">
+$.cacheImg('porker', '../img/img.png');   
+$(function() {
+	$("#test").canvas("desk"); //初始化canvas		
+	$("$desk").entity("card1",{    //将初始化的canvas转成entity对象， 并命名为"card1"
+            sx : 0,   //可选。原图片开始剪切的 x 坐标位置。
+            sy : 0,   //可选。原图片开始剪切的 y 坐标位置。
+            sw : 50,    //可选。原图片被剪切的宽度。
+            sh : 30,    //可选。原图片被剪切的高度。
+            dx : 0,    //在画布上放置图像的 x 坐标位置
+            dy : 0,    //在画布上放置图像的 y 坐标位置。
+            dw : 50,   //可选。在画布上要使用的图像的宽度。（伸展或缩小图像）
+            dh : 30,   //可选。在画布上要使用的图像的高度。（伸展或缩小图像）
+	})
+	.res("porker")    //通过res()方法将预先加载的img资源添加进来</span>
+	.translate(0,0)    //水平向右位移100，垂直向下位移60</span>
+    .draw();    //将entity对象画在画布上。</span>
+});
+
+function move(){
+	$("$desk@card1").remove();
+	$("$desk").entity("card1",{    //将初始化的canvas转成entity对象， 并命名为"card1"
+            sx : 0,   //可选。原图片开始剪切的 x 坐标位置。
+            sy : 0,   //可选。原图片开始剪切的 y 坐标位置。
+            sw : 50,    //可选。原图片被剪切的宽度。
+            sh : 30,    //可选。原图片被剪切的高度。
+            dx : 0,    //在画布上放置图像的 x 坐标位置
+            dy : 0,    //在画布上放置图像的 y 坐标位置。
+            dw : 50,   //可选。在画布上要使用的图像的宽度。（伸展或缩小图像）
+            dh : 30,   //可选。在画布上要使用的图像的高度。（伸展或缩小图像）
+	})
+	.res("porker")    //通过res()方法将预先加载的img资源添加进来</span>
+	.translate(100,0)    //水平向右位移100，垂直向下位移60</span>
+    .draw();    //将entity对象画在画布上。</span>
+}
+</script>
+<canvas id="test" width="507px" height="320px" style="border:1px solid #F00"></canvas>
+<br />&nbsp;&nbsp;&nbsp;<input type="button" onClick="move()" value="move">&nbsp;&nbsp;
+</p>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+		<title>console</title>
+		<meta name="description" content="">
+		<meta name="author" content="Administrator">
+
+		<meta name="viewport" content="width=device-width; initial-scale=1.0">
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico">
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+        <script src="js/elves.js"></script>
+        <script src="js/dom.js"></script>
+        <script src="js/lc.debug.js"></script>
+		
+		<script>
+var _players = [{name:'device0',ip:'10.100.100.0',position:0},{name:'device1',ip:'10.100.100.1',position:1},{name:'device2',ip:'10.100.100.2',position:2}];
+var status = [];
+var device = [],contents="";
+		
+function openDebug1(){
+	var data = {players:_players,self:_players[0],forward:_players[2],backward:_players[1],playNum:3};
+	device[0] = window.open('debug1.html','debug1','height=400,width=400,top=0,left=200');
+	setTimeout( function(){device[0].postMessage(JSON.stringify(data),"*");}, 400);
+}
+function openDebug2(){
+	var data = {players:_players,self:_players[1],forward:_players[0],backward:_players[2],playNum:3};
+	device[1] = window.open('debug2.html','debug2','height=400,width=400,top=0,left=500');
+	setTimeout( function(){device[1].postMessage(JSON.stringify(data),"*");}, 400);
+}
+function openDebug3(){
+	var data = {players:_players,self:_players[2],forward:_players[1],backward:_players[0],playNum:3};
+	device[2] = window.open('debug3.html','debug3','height=400,width=400,top=0,left=800');
+	setTimeout( function(){device[2].postMessage(JSON.stringify(data),"*");}, 400);
+}
+
+window.onload = function(){
+	setTimeout( openDebug1, 1000);
+	setTimeout( openDebug2, 2000);
+	setTimeout( openDebug3, 3000);
+};
+		
+        
+
+window.addEventListener('message', function(event) {
+	//alert(event.source == debug1);
+	var data = JSON.parse(event.data);
+	console.log(data);
+	if(data.action == "open"){
+		contents = document.getElementById("text").innerHTML + "<br />"+data.msg+"就绪";
+		document.getElementById("text").innerHTML = contents;
+	}
+	
+	if(data.action == "closed"){
+		contents = document.getElementById("text").innerHTML + "<br />"+data.msg+"关闭";
+		document.getElementById("text").innerHTML = contents;
+	} 
+	
+	if(data.action == "getMsg"){
+		contents = document.getElementById("text").innerHTML + "<br />"+data.msg+"已收到信息";
+		document.getElementById("text").innerHTML = contents;
+	}
+	
+	
+	if(data.action == "orientation"){
+		for(var i=0;i<device.length ;i++){
+			if(device[i] == event.source ){
+				var echoMsg = "";
+				if(data.msg == -1){ echoMsg = "跟随系统"
+				}else if(data.msg == 0){echoMsg = "强制横屏"
+				}else if(data.msg == 1){echoMsg = "强制竖屏"}
+				
+				contents = document.getElementById("text").innerHTML + "<br />"+_players[i].name+echoMsg;
+				document.getElementById("text").innerHTML = contents;
+				break;
+			};
+		}
+		 
+	}
+	
+	
+	if(data.action == "shake"){
+		for(var i=0;i<device.length ;i++){
+			if(device[i] == event.source ){
+				contents = document.getElementById("text").innerHTML + "<br />"+_players[i].name+"震动"+data.msg+"毫秒";
+				document.getElementById("text").innerHTML = contents;
+				break;
+			};
+		}
+		 
+	}
+	
+	if(data.action == "onReady"){
+		status.push(data.msg);
+		contents = document.getElementById("text").innerHTML + "<br />"+data.msg+"--ready";
+		document.getElementById("text").innerHTML = contents;
+		if(status.length == 3){
+			for(var i=0;i<device.length ;i++){
+				var postData = JSON.stringify({
+					action:'allReady',
+					});
+				device[i].postMessage(postData,"*");
+				contents = document.getElementById("text").innerHTML + "<br />发送ready信息给"+_players[i].name;
+				document.getElementById("text").innerHTML = contents;
+			}
+		}
+	}
+	
+	if(data.action == "postAll"){
+		for(var i=0;i<device.length ;i++){
+			if(device[i] == event.source ){
+				contents = document.getElementById("text").innerHTML + "<br />"+_players[i].name+"发出信息";
+				document.getElementById("text").innerHTML = contents;
+				break;
+			};
+		}
+		for(var i=0;i<device.length ;i++){
+			if(device[i] != event.source ){
+				console.log(event.data);
+				device[i].postMessage(event.data,"*");
+				contents = document.getElementById("text").innerHTML + "<br />发信息给"+_players[i].name;
+				document.getElementById("text").innerHTML = contents;
+			} ;
+		}
+	}
+	
+	  
+}, false);
+
+// 主窗体关闭,附属子窗体都关闭。
+window.addEventListener('unload', function(e){
+    for(var i=0;i<device.length ;i++){
+		device[i].close();
+	}
+}, false);
+        </script>
+	</head>
+
+	<body>
+		<h1>console</h1>	
+        <div id="text"></div>
+	</body>
+</html>

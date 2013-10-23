@@ -1,0 +1,16 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{font-family:"宋体",Arial, Helvetica, sans-serif; font-size:12px;line-height:22px; background:#FFF; color:#000;}
+
+h1,h2,h3,h4{ width:680px; margin:8px; padding:5px; line-height:18px;font-size:15px; font-weight:normal;  overflow:hidden;}
+h1{ background:#4F81BC; color:#FFF; }
+h1 strong{ float:left;}
+h1 span{ float:left;}
+h1 span{ float:right;}
+h2{ background:#95B3D7; color:#FFF; }
+h3{ background:#DBE5F1;}
+h4{ padding-bottom:0; margin-bottom:4px;font-weight:bold; color:#4F81BC; }
+p{width:680px; margin:8px 8px; padding:0 5px; text-indent:2em;}
+pre{width:678px; margin:4px 8px 8px 8px; padding:5px; border:#95B3D7 dashed 1px;}
+.green{ color:#090;}

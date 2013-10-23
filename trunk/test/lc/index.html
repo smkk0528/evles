@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>evles test</title>
+		<meta name="description" content="" />
+		<meta name="author" content="Alex Wu" />
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<script type="text/javascript" src="js/elves.js"></script>
+		<script type="text/javascript" src="js/dom.js"></script>
+		<script type="text/javascript" src="js/lc.js"></script>
+		<script type="text/javascript">
+			function notify(){
+				$.lc.notify('all',{
+					eventTag : 'onPostMsg',
+					content : {
+						player: ['',{
+							name : 'test',
+						}],
+					},
+				});
+			}
+			/*
+			function onmessage(data){
+				$('#msg').html(JSON.stringify(data));
+				$('#content').html(JSON.stringify(data.content.player));
+			}*/
+			
+			$.addRemoteEventListener('onPostMsg', function(data) { 
+				$('#msg').html(JSON.stringify(data));
+				$('#content').html(JSON.stringify(data.content.player));
+			});
+			
+			function self(){
+				$('#self').html(JSON.stringify($.lc.self()));
+			}
+			
+			function getBackward(){
+				$('#backward').html(JSON.stringify($.lc.getBackward()));
+			}
+			
+			function getForward(){
+				$('#forward').html(JSON.stringify($.lc.getForward()));
+			}
+			
+			function getPlayers(){
+				$('#players').html(JSON.stringify($.lc.players()));
+			}
+			
+			function getUserCount(){
+				$('#userCount').html($.lc.userCount());
+			}
+			
+			function geWidth(){
+				$('#width').html($.lc.width());
+			}
+			
+			function geHeight(){
+				$('#height').html($.lc.height());
+			}
+			
+			function onready(){
+				$('#allready').html('all ready');
+			}
+			
+			$(function(){
+				$.lc.ready();
+			});
+		</script>
+	</head>
+	<body>
+		<div id="allready"></div>
+		<div id="msg"></div>
+		<div id="content"></div>
+		<input type="button" value="通知消息" onclick="notify()"/>
+		
+		<div id="self"></div>
+		<input type="button" value="自己属性" onclick="self()"/>
+		
+		<div id="backward"></div>
+		<input type="button" value="下一个" onclick="getBackward()"/>
+		
+		<div id="forward"></div>
+		<input type="button" value="上一个" onclick="getForward()"/>
+		
+		<div id="players"></div>
+		<input type="button" value="getPlayers" onclick="getPlayers()"/>
+		
+		<div id="userCount"></div>
+		<input type="button" value="getUserCount" onclick="getUserCount()"/>
+		
+		<div id="width"></div>
+		<input type="button" value="width" onclick="geWidth()"/>
+		
+		<div id="height"></div>
+		<input type="button" value="height" onclick="geHeight()"/>
+		
+		<div>censers</div>
+		<input type="button" value="横屏" onclick="$.lc.setRequestedOrientation(0)"/>
+		<input type="button" value="竖屏" onclick="$.lc.setRequestedOrientation(1)"/>
+		<input type="button" value="随系统" onclick="$.lc.setRequestedOrientation(-1)"/>
+		
+		<input type="button" value="震动" onclick="$.lc.shake(1000)"/>
+	</body>
+</html>

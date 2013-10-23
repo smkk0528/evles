@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+		<title>evles test</title>
+		<meta name="description" content="" />
+		<meta name="author" content="Alex Wu" />
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<script type="text/javascript" src="../../../src/elves.js"></script>
+		<script type="text/javascript" src="../../../src/plugin/dom.js"></script>
+		<script type="text/javascript" src="js/porker.js"></script>
+		<script type="text/javascript" >
+			$.cacheImg('porker', 'img/cards4.png');
+			//first modify porker
+			for (var card in NormalPorker.data ) {
+				if (card.num === 1) {
+					card.num = 14;
+				}
+				if (card.num === 2) {
+					card.num = 15;
+				}
+				card.dx = 0;
+				card.dy = 0;
+				card.dh = card.sh;
+				card.dw = card.sw;
+				card.name = card.color + "_" + card.type + "_" + card.num;
+			}
+			var porkerArr = [], minePorkerArr = [], fapaiIndex = 0, selfCurrentIndex = 0;
+			porkerArr = $.mess(NormalPorker);
+
+			//发牌前先洗牌
+			minePorkerArr = $.minePorker(porkerArr, fapaiIndex, 3, 51);
+			//领取自己的牌
+
+			$(function() {
+				$("#test").asCanvas({
+					name : 'desk'
+				});
+				//画中心牌
+				var centerCard = {
+					name : 'back-0',
+					dx : 200,
+					dy : 50,
+					type : 'img',
+					res : 'porker'
+				};
+				$.extend(centerCard, NormalPorker.back);
+				centerCard.dh = centerCard.sh;
+				centerCard.dw = centerCard.sw;
+				$('$desk').entity(centerCard);
+
+				sendLeftPorker();
+				setTimeout(function() {
+					var card = {
+						name : 'back-1',
+						dx : 0,
+						dy : 0,
+						translateX : 80,
+						translateY : 50,
+						rotate : 90,
+						type : 'img',
+						res : 'porker'
+					};
+					$.extend(card, NormalPorker.back);
+					card.dh = card.sh;
+					card.dw = card.sw;
+					$('$desk').entity(card);
+				}, 300);
+				setTimeout(function() {
+					var card = {
+						name : 'back-2',
+						dx : 0,
+						dy : 0,
+						translateX : 350,
+						translateY : 90,
+						rotate : -90,
+						type : 'img',
+						res : 'porker'
+					};
+					$.extend(card, NormalPorker.back);
+					card.dh = card.sh;
+					card.dw = card.sw;
+					$('$desk').entity(card);
+				}, 600);
+			});
+
+			function sendLeftPorker() {
+				sendBackCard('back-left-' + selfCurrentIndex, 200, 50, 90, 80, 50, 90);
+				setTimeout(sendSelfPorker, 300);
+			}
+
+			function sendBackCard(name, stx, sty, sr, dtx, dty, dr) {
+				var card = {
+					name : name,
+					dx : 0,
+					dy : 0,
+					translateX : stx,
+					translateY : sty,
+					rotate : sr,
+					type : 'img',
+					res : 'porker'
+				};
+				$.extend(card, NormalPorker.back);
+				card.dh = card.sh;
+				card.dw = card.sw;
+				//发左侧牌
+				$('$desk').entity(card).animation().to({
+					translateX : dtx,
+					translateY : dty,
+					rotate : dr,
+				}, 300).onComplete(function() {
+					$('$desk@' + this.name).remove();
+				}).start();
+			}
+
+			function sendSelfPorker() {
+				if (selfCurrentIndex < minePorkerArr.length) {
+					var card = minePorkerArr[selfCurrentIndex];
+					card.dh = card.sh;
+					card.dw = card.sw;
+					card.name = card.color + '_' + card.cardType + '_' + card.num;
+					card.dx = 200;
+					card.dy = 50;
+					card.type = 'img';
+					card.res = 'porker';
+					//发自己牌
+					$('$desk').entity(card).bind('touchstart', function(x, y) {
+						if (this.dy === 240) {
+							this.dy = 200;
+						} else {
+							this.dy = 240;
+						}
+
+						$('$desk').flush();
+					}, false).animation().to({
+						dx : 30 + selfCurrentIndex * 25,
+						dy : 240
+					}, 300).onComplete(function() {
+						sendRightPorker();
+					}).start();
+				} else {
+					selfCurrentIndex = 0;
+					if (fapaiIndex == 0) {
+						paixu();
+						//抢地主
+						qiangdizhu();
+					}
+				}
+				selfCurrentIndex++;
+			}
+
+			function sendRightPorker() {
+				//发右侧牌
+				sendBackCard('back-right-' + selfCurrentIndex, 200, 90, -90, 350, 90, -90);
+				setTimeout(sendLeftPorker, 300);
+			}
+
+			function paixu() {
+				$.porkerDesc(minePorkerArr);
+				// console.log(minePorkerArr);
+				for (var i = 0; i < minePorkerArr.length; i++) {
+					var card = minePorkerArr[i];
+					card.dx = 30 + i * 25;
+					//console.log('selector:'+'$desk@'+card.color + '_' + card.cardType + '_' + card.num);
+					$('$desk@' + card.color + '_' + card.cardType + '_' + card.num).up();
+				}
+				$('$desk').flush();
+			}
+
+			function qiangdizhu() {
+				$('$desk@back-0').remove();
+				for (var i = porkerArr.length - 3; i < porkerArr.length; i++) {
+					var card = porkerArr[i];
+					card.dh = card.sh;
+					card.dw = card.sw;
+					card.name = card.color + '_' + card.cardType + '_' + card.num;
+					card.dx = 80 + 30 * (porkerArr.length - i);
+					card.dy = 60;
+					card.type = 'img';
+					card.res = 'porker';
+					// console.log(card);
+					$('$desk').entity(card);
+				}
+				$('$desk').flush();
+			}
+		</script>
+
+	</head>
+
+	<body>
+		<canvas id="test" width="507px" height="320px" style='border:1px solid red;'>
+			Fallback content, in case the browser does not support Canvas.
+		</canvas>
+		<div id="takeLandowner">
+			<input type="button" name="qiangdizhu" value="1分" onclick="javascript:qiangdizhu(1)" />
+			<input type="button" name="qiangdizhu" value="2分" onclick="javascript:qiangdizhu(2)" />
+			<input type="button" name="qiangdizhu" value="3分" onclick="javascript:qiangdizhu(3)" />
+			<input type="button" name="qiangdizhu" value="不抢" onclick="javascript:qiangdizhu(0)" />
+		</div>
+		<div>
+			<input type="button" name="chupai" value="出牌" onclick="javascript:chupai()" />
+		</div>
+		<div id="log">
+
+		</div>
+	</body>
+</html>

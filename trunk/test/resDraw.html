@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+		<title>evles test</title>
+		<meta name="description" content="" />
+		<meta name="author" content="Alex Wu" />
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<script type="text/javascript" src="../src/elves.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$('#test').canvas('test');
+				$('$test').entity('shape1',{
+					r:50,
+					x:30,
+					y:40,
+				}).shape(function(){
+					var option = this[0],cxt = this.context;
+					cxt.save();
+					cxt.fillStyle = '#999999';
+					cxt.beginPath();
+					cxt.arc(option.x, option.y, option.r, 0, 2 * Math.PI, true);
+					cxt.closePath();
+					cxt.fill();
+					cxt.restore();
+				}).animation().to({
+					r:10,
+					x:300,
+					y:240,
+				},1000).onUpdate( function () {
+					console.log(this.r);
+				}).start();
+				
+				$('$test').entity('image1',{dx : 20,dy:20}).res('card').draw();
+				
+			});
+		</script>
+	</head>
+
+	<body>
+		<canvas id="test" width="507px" height="320px" style='border:1px solid red;'>
+			Fallback content, in case the browser does not support Canvas.
+		</canvas>
+		<div id="log"></div>
+	</body>
+</html>

@@ -1,0 +1,86 @@
+<!doctype html>
+<html><head>
+<meta charset="utf-8">
+<title>animation-onUpdate</title>
+<meta name="keywords" content="" />
+<meta name="description" content="elves.js" /> 
+<meta name="author" content="elves Team" />
+<link rel="stylesheet" type="text/css" href="../style/style.css" />
+</head>
+
+<body>
+<h1><strong>onUpdate()</strong></h1>
+<h2>概述</h2>
+<p>animation方法之一。定义动画执行中，实时绑定执行某方法</p>
+
+<h3>描述:</h3>
+<p>实时显示entity对象的dx变化</p>
+<h4>HTML 代码:</h4>
+<pre>&lt;canvas id="test" width="507px" height="320px" style="border:1px solid #F00"&gt;</pre>
+<h4>elves 代码:</h4>
+<pre>
+$.cacheImg('porker', 'img/img.png');   <span class="green">//预先加载img资源</span>
+$(function() {
+	
+    $("#test").canvas("desk"); //初始化canvas		
+	$("$desk").entity("card1",{    //将初始化的canvas转成entity对象， 并命名为"card1"
+            sx : 0,   
+            sy : 0,   
+            sw : 50,    
+            sh : 30,    
+            dx : 0,    
+            dy : 0,    
+            dw : 50,  
+            dh : 30  
+	})
+	.res("porker").draw();
+	 
+    
+    $("$desk@card1").animation().to({
+		dx : 100 ,
+		dy : 0
+	}, 200)
+	.onUpdate( function(){ $("#moveLog")[0].innerHTML += "<br />" + this.dx } )   <span class="green">//实时显示出dx的变化</span>
+	.start();    
+});
+
+</pre>
+<h4>demo:</h4>
+<p>
+<script type="text/javascript" src="../../../src/elves.js"></script>
+<script type="text/javascript" src="../../../src/plugin/dom.js"></script>
+<script type="text/javascript">
+$.cacheImg('porker', '../img/img.png');   
+$(function() {
+	$("#test").canvas("desk"); //初始化canvas		
+	$("$desk").entity("card1",{    //将初始化的canvas转成entity对象， 并命名为"card1"
+            sx : 0,   
+            sy : 0,   
+            sw : 50,    
+            sh : 30,    
+            dx : 0,    
+            dy : 0,    
+            dw : 50,  
+            dh : 30,   
+	})
+	.res("porker").draw();
+});
+ 
+function move(){
+	 
+	 $("$desk@card1").animation().to({
+		dx : 100 ,
+		dy : 0
+	}, 200)
+	.onUpdate( function(){ $("#moveLog")[0].innerHTML += "<br />" + this.dx } )    
+	.start();  
+	 
+}
+</script>
+<canvas id="test" width="507px" height="320px" style="border:1px solid #F00"></canvas>
+<div id="moveLog"></div> 
+
+<br /><input type="button" onClick="move()" value="开始动画">&nbsp;&nbsp;
+</p>
+</body>
+</html>

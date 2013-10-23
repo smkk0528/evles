@@ -1,0 +1,25 @@
+<!doctype html>
+<html><head>
+<meta charset="utf-8">
+<title>css</title>
+<meta name="keywords" content="" />
+<meta name="description" content="elves.js" /> 
+<meta name="author" content="elves Team" />
+<link rel="stylesheet" type="text/css" href="../style/style.css" />
+</head>
+
+<body>
+<h1><strong>css(name,value)</strong></h1>
+<h2>概述</h2>
+<p>设置匹配元素的样式属性。</p>
+<h3>参数:name</h3>
+<p>要设置的属性名称</p>
+<h3>参数:value</h3>
+<p>要设置的属性值</p>
+<h3>描述：</h3>
+<p>将所有段落字体设为红色</p>
+<h4>elves 代码:</h4>
+<pre>$("p").css("color","red");</pre>
+
+</body>
+</html>

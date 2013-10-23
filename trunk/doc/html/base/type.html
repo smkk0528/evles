@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>type</title>
+		<meta name="keywords" content="" />
+		<meta name="description" content="elves.js" />
+		<meta name="author" content="elves Team" />
+		<link rel="stylesheet" type="text/css" href="../style/style.css" />
+	</head>
+
+	<body>
+		<h1><strong>type</strong><span>&gt;</span></h1>
+		<h2>概述</h2>
+		<p>
+			取输入对象的类型
+		</p>
+		<h3>描述:</h3>
+		<p>
+			用法： $.type([Anything]);
+		</p>
+		<p>
+			可以区分以下类型：Boolean Number String Function Array Date RegExp Object Error
+		</p>
+		<h4>elves 代码:</h4>
+		<pre>document.write($.type(true));
+document.write($.type(1.3));
+document.write($.type('this is string'));
+document.write($.type(function(){}));
+document.write($.type([]));
+document.write($.type(/a/gi));
+document.write($.type({}));</pre>
+		<h4>结果:</h4>
+		<pre>Boolean
+Number
+String
+Function
+Array
+RegExp
+Object
+</pre>
+	</body>
+</html>

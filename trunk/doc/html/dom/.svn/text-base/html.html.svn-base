@@ -1,0 +1,26 @@
+<!doctype html>
+<html><head>
+<meta charset="utf-8">
+<title>html()</title>
+<meta name="keywords" content="" />
+<meta name="description" content="elves.js" /> 
+<meta name="author" content="elves Team" />
+<link rel="stylesheet" type="text/css" href="../style/style.css" />
+</head>
+
+<body>
+<h1><strong>html(value)</strong></h1>
+<h2>概述</h2>
+<p>给唯一匹配元素获取或添加HTML内容</p>
+<h3>参数:value</h3>
+<p>参数:value可选，value存在，则将 value添加到匹配元素内；value不存在，则获取匹配元素内HTML内容</p>
+<h3>描述:</h3>
+<p>为ID 为"myDiv"的元素添加HTML 内容</p>
+<h4>elves 代码:</h4>
+<pre>$("#myDiv").html("Hello world");</pre> 
+<h3>描述:</h3>
+<p>获取ID 为"myDiv"的元素的HTML 内容</p>
+<h4>elves 代码:</h4>
+<pre>$("#myDiv").html();</pre> 
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!doctype html>
+<html><head>
+<meta charset="utf-8">
+<title>animation-onComplete</title>
+<meta name="keywords" content="" />
+<meta name="description" content="elves.js" /> 
+<meta name="author" content="elves Team" />
+<link rel="stylesheet" type="text/css" href="../style/style.css" />
+</head>
+
+<body>
+<h1><strong>onComplete()</strong></h1>
+<h2>概述</h2>
+<p>animation方法之一。动画执行完成后执行此方法。</p>
+<h3>参数:callback</h3>
+<p>动画执行完成后  执行的函数</p>
+
+ 
+ 
+<h3>描述:</h3>
+<p>在动画执行后将$desk@card2实体删除。</p>
+
+<h4>HTML 代码:</h4>
+<pre>&lt;canvas id="test" width="507px" height="320px" style="border:1px solid #F00"&gt;</pre>
+<h4>elves 代码:</h4>
+<pre>
+$.cacheImg('porker', '../img/img.png');   <span class="green">//预先加载img资源</span> 
+  
+$(function() {
+	$("#test").canvas("desk"); <span class="green">//初始化canvas		</span> 
+	$("$desk").entity("card1",{    <span class="green">//创建entity对象， 并命名为"card1"</span> 
+            sx : 0,   
+            sy : 0,   
+            sw : 50,    
+            sh : 30,    
+            dx : 0,    
+            dy : 0,    
+            dw : 50,  
+            dh : 30  
+	}).res("porker").draw();
+    
+    $("$desk").entity("card2",{    <span class="green">//创建entity对象， 并命名为"card2"</span> 
+            sx : 50,   
+            sy : 30,   
+            sw : 50,    
+            sh : 30,    
+            dx : 40,    
+            dy : 20,    
+            dw : 50,  
+            dh : 30  
+	}).res("porker").draw();
+    
+    $("$desk@card1").animation().to({dx:400,dy:0},2000)
+    .onComplete(function(){    
+		$("$desk@card2").remove();    <span class="green">//在动画执行后将$desk@card2实体删除。</span> 
+	}).start();
+    
+});
+
+</pre>
+<h4>demo:</h4>
+<p>
+<script type="text/javascript" src="../../../src/elves.js"></script>
+<script type="text/javascript" src="../../../src/plugin/dom.js"></script>
+<script type="text/javascript">
+$.cacheImg('porker', '../img/img.png');   
+$(function() {
+	$("#test").canvas("desk"); 
+	$("$desk").entity("card1",{    
+            sx : 0,   
+            sy : 0,   
+            sw : 50,    
+            sh : 30,    
+            dx : 0,    
+            dy : 0,    
+            dw : 50,  
+            dh : 30  
+	}).res("porker").draw();
+    
+    $("$desk").entity("card2",{    
+            sx : 50,   
+            sy : 30,   
+            sw : 50,    
+            sh : 30,    
+            dx : 40,    
+            dy : 20,    
+            dw : 50,  
+            dh : 30  
+	}).res("porker").draw();
+    
+    
+    
+});
+
+
+function move(){
+	$("$desk@card1").animation().to({dx:400,dy:0},2000)
+    .onComplete(function(){    
+		$("$desk@card2").remove();    
+	}).start();
+	
+	}
+</script>
+<canvas id="test" width="507px" height="320px" style="border:1px solid #F00"></canvas>
+ 
+
+<br /><input type="button" onClick="move()" value="开始动画">&nbsp;&nbsp;
+</p>
+
+</body>
+</html>

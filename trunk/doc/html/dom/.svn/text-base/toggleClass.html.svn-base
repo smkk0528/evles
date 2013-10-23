@@ -1,0 +1,23 @@
+<!doctype html>
+<html><head>
+<meta charset="utf-8">
+<title>toggleClass</title>
+<meta name="keywords" content="" />
+<meta name="description" content="elves.js" /> 
+<meta name="author" content="elves Team" />
+<link rel="stylesheet" type="text/css" href="../style/style.css" />
+</head>
+
+<body>
+<h1><strong>toggleClass(name)</strong></h1>
+<h2>概述</h2>
+<p>如果css类名已存在则移除，如果不存在则添加</p>
+<h3>参数:name</h3>
+<p>CSS类名</p>
+<h3>示例:</h3>
+<p>为匹配的元素切换 'selected' 类</p>
+<h4>elves 代码:</h4>
+<pre>$("p").toggleClass("selected");</pre>
+
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!doctype html>
+<html><head>
+<meta charset="utf-8">
+<title>entity-bind</title>
+<meta name="keywords" content="" />
+<meta name="description" content="elves.js" /> 
+<meta name="author" content="elves Team" />
+<link rel="stylesheet" type="text/css" href="../style/style.css" />
+</head>
+
+<body>
+<h1><strong>bind()</strong></h1>
+<h2>概述</h2>
+<p>entity方法之一。 在匹配实体上绑定事件。</p>
+ 
+<h3>描述:</h3>
+<p>将名为“$desk@card1”的entity对象上绑定touchstart事件。</p>
+
+<h4>HTML 代码:</h4>
+<pre>&lt;canvas id="test" width="507px" height="320px" style="border:1px solid #F00"&gt;</pre>
+<h4>elves 代码:</h4>
+<pre>
+$.cacheImg('porker', 'img/img.png');   <span class="green">//预先加载img资源</span>
+
+function msg(){ alert("touchstart时间绑定成功"); }     <span class="green">//'touchstart'事件触发时，执行的函数</span>
+
+$(function() {
+	$("#test").canvas("desk");  <span class="green">//初始化canvas</span>
+		
+	$("$desk").entity("card1",{     <span class="green">//将初始化的canvas转成entity对象， 并命名为"card1"</span>
+            sx : 0,   
+            sy : 0,   
+            sw : 50,  
+            sh : 30,    
+            dx : 0,    
+            dy : 0,    
+            dw : 50,   
+            dh : 30,   
+	}).res("porker").draw();  
+    
+    $("$desk@card1").bind('touchstart',     <span class="green">//在$("$desk@card1")实体上绑定'touchstart'事件</span>
+		msg,    <span class="green">//'touchstart'事件触发时，执行函数</span>
+        false);    <span class="green">//设置为false表示，touchstart事件不再向$desk@card1之后的entity对象传递</span>
+                  <span class="green">//设置为true表示，touchstart事件向$desk@card1之后的entity对象传递，直到后面没有实体为止</span>
+});
+
+</pre>
+<h4>demo:</h4>
+<p>
+<script type="text/javascript" src="../../../src/elves.js"></script>
+<script type="text/javascript" src="../../../src/plugin/dom.js"></script>
+<script type="text/javascript">
+$.cacheImg('porker', '../img/img.png');   //预先加载img资源
+
+function msg(){ alert("touchstart事件绑定成功"); }     //'touchstart'事件触发时，执行的函数
+
+$(function() {
+	$("#test").canvas("desk");  //初始化canvas
+		
+	$("$desk").entity("card1",{     //将初始化的canvas转成entity对象， 并命名为"card1"
+            sx : 0,   
+            sy : 0,   
+            sw : 50,  
+            sh : 30,    
+            dx : 0,    
+            dy : 0,    
+            dw : 50,   
+            dh : 30,   
+	}).res("porker").draw();  
+    
+    $("$desk@card1").bind('touchstart',msg,false)    
+});
+
+function entity_unbind(){
+$("$desk@card1").unbind('touchstart',msg)    
+}
+
+function entity_bind(){
+$("$desk@card1").bind('touchstart',msg,false)    
+}
+
+</script>
+<canvas id="test" width="507px" height="320px" style="border:1px solid #F00"></canvas>
+<br /><input type="button" onClick="entity_bind()" value="添加事件绑定" />  &nbsp;&nbsp;&nbsp;点击entity对象，触发绑定的事件
+<br /><input type="button" onClick="entity_unbind()" value="解除事件绑定" />    &nbsp;&nbsp;&nbsp;解除事件绑定后 点击entity对象，无反应
+</p>
+</body>
+</html>

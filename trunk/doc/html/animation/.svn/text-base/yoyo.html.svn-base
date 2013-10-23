@@ -1,0 +1,85 @@
+<!doctype html>
+<html><head>
+<meta charset="utf-8">
+<title>animation-yoyo</title>
+<meta name="keywords" content="" />
+<meta name="description" content="elves.js" /> 
+<meta name="author" content="elves Team" />
+<link rel="stylesheet" type="text/css" href="../style/style.css" />
+</head>
+
+<body>
+<h1><strong>yoyo()</strong></h1>
+<h2>概述</h2>
+<p>animation方法之一。animation方法之一。定义动画类似yoyo球的动画效果，实体会按照之前动画轨迹返回到起点。</p>
+ 
+  
+
+<h4>HTML 代码:</h4>
+<pre>&lt;canvas id="test" width="507px" height="320px" style="border:1px solid #F00"&gt;</pre>
+<h4>elves 代码:</h4>
+<pre>
+$.cacheImg('porker', '../img/img.png');   <span class="green">//预先加载img资源</span> 
+  
+$(function() {
+	$("#test").canvas("desk"); //初始化canvas		
+	$("$desk").entity("card1",{    //将初始化的canvas转成entity对象， 并命名为"card1"
+            sx : 0,   
+            sy : 0,   
+            sw : 50,    
+            sh : 30,    
+            dx : 0,    
+            dy : 0,    
+            dw : 50,  
+            dh : 30  
+	})
+	.res("porker")    
+	.animation()    //将entity对象转成animation对象
+	.repeat(1)    //动画的yoyo效果要将repeat()的值至少设置为1。
+	.yoyo( true )   //将动画的yoyo效果开启。
+    .start();   //启动动画执行
+});
+
+</pre>
+<h4>demo:</h4>
+<p>
+<script type="text/javascript" src="../../../src/elves.js"></script>
+<script type="text/javascript" src="../../../src/plugin/dom.js"></script>
+<script type="text/javascript">
+$.cacheImg('porker', '../img/img.png');   
+$(function() {
+	$("#test").canvas("desk"); //初始化canvas		
+	$("$desk").entity("card1",{    //将初始化的canvas转成entity对象， 并命名为"card1"
+            sx : 0,   
+            sy : 0,   
+            sw : 50,    
+            sh : 30,    
+            dx : 0,    
+            dy : 0,    
+            dw : 50,  
+            dh : 30,   
+	})
+	.res("porker").draw();
+});
+ 
+function move(){
+	 
+	
+	var t =  parseInt(document.getElementById("t").value);
+	
+	$("$desk@card1").animation()    //将entity对象转成animation对象
+	.to({dx:180,dy:0},800)   //使用animation对象的动画方法to，向右位移100,动画持续1000毫秒
+	.repeat(t)
+	.yoyo( true )
+	.start();   //执行动画
+	 
+}
+</script>
+<canvas id="test" width="507px" height="320px" style="border:1px solid #F00"></canvas>
+ 
+
+<br />重复次数<input id="t" type="text" value="3">&nbsp;&nbsp;&nbsp;<input type="button" onClick="move()" value="yoyo">&nbsp;&nbsp;
+</p>
+
+</body>
+</html>

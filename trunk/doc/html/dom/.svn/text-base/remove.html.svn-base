@@ -1,0 +1,25 @@
+<!doctype html>
+<html><head>
+<meta charset="utf-8">
+<title>append</title>
+<meta name="keywords" content="" />
+<meta name="description" content="elves.js" /> 
+<meta name="author" content="elves Team" />
+<link rel="stylesheet" type="text/css" href="../style/style.css" />
+</head>
+
+<body>
+<h1><strong>remove()</strong> </h1>
+<h2>概述</h2>
+<p>删除唯一匹配的元素</p>
+<h3>描述:</h3>
+<p>删除ID是"myDiv"的元素</p>
+<h4>HTML 代码:</h4>
+<pre>&lt;p&gt;This is just a test.&lt;div id="myDiv"&gt;id="myDiv"&lt;/div&gt;&lt;/p&gt;</pre>
+<h4>elves 代码:</h4>
+<pre>$("#myDiv").remove();</pre>
+<h4>结果:</h4>
+<pre>&lt;p&gt;This is just a test.&lt;/p&gt;</pre>
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/repos/lc/!svn/ver/140/evles/trunk/doc/html/animation
+END
+start.html
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/repos/lc/!svn/ver/140/evles/trunk/doc/html/animation/start.html
+END
+delay.html
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/repos/lc/!svn/ver/140/evles/trunk/doc/html/animation/delay.html
+END
+onUpdate.html
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/repos/lc/!svn/ver/140/evles/trunk/doc/html/animation/onUpdate.html
+END
+yoyo.html
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/repos/lc/!svn/ver/140/evles/trunk/doc/html/animation/yoyo.html
+END
+repeat.html
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/repos/lc/!svn/ver/140/evles/trunk/doc/html/animation/repeat.html
+END
+to.html
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/repos/lc/!svn/ver/140/evles/trunk/doc/html/animation/to.html
+END
+onComplete.html
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/repos/lc/!svn/ver/140/evles/trunk/doc/html/animation/onComplete.html
+END
+stop.html
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/repos/lc/!svn/ver/140/evles/trunk/doc/html/animation/stop.html
+END
+easing.html
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/repos/lc/!svn/ver/140/evles/trunk/doc/html/animation/easing.html
+END
+onStart.html
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/repos/lc/!svn/ver/140/evles/trunk/doc/html/animation/onStart.html
+END

@@ -1,0 +1,23 @@
+<!doctype html>
+<html><head>
+<meta charset="utf-8">
+<title>removeClass(name)</title>
+<meta name="keywords" content="" />
+<meta name="description" content="elves.js" /> 
+<meta name="author" content="elves Team" />
+<link rel="stylesheet" type="text/css" href="../style/style.css" />
+</head>
+
+<body>
+<h1><strong>removeClass(name)</strong></h1>
+<h2>概述</h2>
+<p>为每个匹配的元素删除指定的CSS类名。</p>
+<h3>参数:name</h3>
+<p>CSS类名</p>
+<h3>示例:</h3>
+<p>从匹配的元素中删除 'selected' 类</p>
+<h4>elves 代码:</h4>
+<pre>$("p").removeClass("selected");</pre>
+
+</body>
+</html>

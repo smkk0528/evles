@@ -1,0 +1,74 @@
+<!doctype html>
+<html><head>
+<meta charset="utf-8">
+<title>entity-shape</title>
+<meta name="keywords" content="" />
+<meta name="description" content="elves.js" /> 
+<meta name="author" content="elves Team" />
+<link rel="stylesheet" type="text/css" href="../style/style.css" />
+</head>
+
+<body>
+<h1><strong>shape()</strong></h1>
+<h2>概述</h2>
+<p>entity方法之一。 将所要画图形的方法 添加到entity对象中，并通知draw()方法将要往画布上画。shape()方法所需的参数通过entity()方法设置。</p>
+ 
+<h3>描述:</h3>
+<p>通过shape()方法往画布上画圆</p>
+
+<h4>HTML 代码:</h4>
+<pre>&lt;canvas id="test" width="507px" height="320px" style="border:1px solid #F00"&gt;</pre>
+<h4>elves 代码:</h4>
+<pre>
+
+
+$(function(){
+    $('#test').canvas('desk');   <span class="green">//初始化canvas</span>
+    
+    $('$desk').entity('shape1',{   <span class="green">//创建entity对象，命名为shape1</span>
+        r:25,    <span class="green">//设置所画圆的参数，r半径</span>
+        x:100,    <span class="green">//圆心的坐标</span>
+        y:100,    <span class="green">//圆心的坐标</span>
+    }).shape(function(){    <span class="green">//通过shape(),将画圆的方法添加到entity对象中</span>
+        var option = this[0],cxt = this.context;
+        cxt.save();
+        cxt.fillStyle = '#999999';
+        cxt.beginPath();
+        cxt.arc(option.x, option.y, option.r, 0, 2 * Math.PI, true);
+        cxt.closePath();
+        cxt.fill();
+        cxt.restore();
+    }).draw();    <span class="green">//将圆画在画布上</span>
+});
+
+
+</pre>
+<h4>demo:</h4>
+<p>
+<script type="text/javascript" src="../../../src/elves.js"></script>
+<script type="text/javascript" src="../../../src/plugin/dom.js"></script>
+<script type="text/javascript">
+$(function(){
+    $('#test').canvas('desk');   //初始化canvas
+    
+    $('$desk').entity('shape1',{   //创建entity对象，命名为shape1
+        r:25,    //设置所画圆的参数，r半径
+        x:100,    //圆心的坐标
+        y:100,    //圆心的坐标
+    }).shape(function(){    //通过shape(),将画圆的方法添加到entity对象中
+        var option = this[0],cxt = this.context;
+        cxt.save();
+        cxt.fillStyle = '#999999';
+        cxt.beginPath();
+        cxt.arc(option.x, option.y, option.r, 0, 2 * Math.PI, true);
+        cxt.closePath();
+        cxt.fill();
+        cxt.restore();
+    }).draw();    //将圆画在画布上
+});
+</script>
+<canvas id="test" width="507px" height="320px" style="border:1px solid #F00"></canvas>
+<br /> 
+</p>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>isAndroid</title>
+		<meta name="keywords" content="" />
+		<meta name="description" content="elves.js" />
+		<meta name="author" content="elves Team" />
+		<link rel="stylesheet" type="text/css" href="../style/style.css" />
+	</head>
+
+	<body>
+		<h1><strong>isAndroid</strong><span>&gt;</span></h1>
+		<h2>概述</h2>
+		<p>
+			使用当前userAgent，判断是否来自于Android设备
+		</p>
+		<h3>描述:</h3>
+		<p>
+			用法： $.isAndroid();
+			无参数。
+		</p>
+		<h4>elves 代码:</h4>
+		<pre>document.write($.isAndroid());</pre>
+		<h4>结果:</h4>
+		<pre>false</pre>
+	</body>
+</html>

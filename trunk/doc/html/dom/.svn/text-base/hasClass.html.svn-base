@@ -1,0 +1,23 @@
+<!doctype html>
+<html><head>
+<meta charset="utf-8">
+<title>hasClass</title>
+<meta name="keywords" content="" />
+<meta name="description" content="elves.js" /> 
+<meta name="author" content="elves Team" />
+<link rel="stylesheet" type="text/css" href="../style/style.css" />
+</head>
+
+<body>
+<h1><strong>hasClass(name)</strong>  <span>返回值：Boolean</span></h1>
+<h2>概述</h2>
+<p>判断一个css类名是否已存在</p>
+<h3>参数:name</h3>
+<p>CSS类名</p>
+<h3>示例:</h3>
+<p>判断匹配的元素是否含有 'selected' 类</p>
+<h4>elves 代码:</h4>
+<pre>$("p").hasClass("selected");</pre>
+
+</body>
+</html>
